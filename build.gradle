@@ -28,7 +28,7 @@ apply plugin: 'io.spring.dependency-management' // 스프링부트의 의존성�
 
 group 'com.webservice.boot'
 version '1.0-SNAPSHOT'
-sourceCompatibility =1.8
+sourceCompatibility =1.8 //java 소스 컴파일 버전
 
 repositories {
     mavenCentral()
@@ -39,6 +39,8 @@ repositories {
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web:')
     implementation('org.projectlombok:lombok')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('com.h2database:h2') // 인메모리 관계형 DB -> 메모리 에서 실행 되므로 애플리케이션이 재시작 할 때마다 초기화됨
     testImplementation('org.springframework.boot:spring-boot-starter-test:')
     //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     // testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'

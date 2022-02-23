@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
@@ -25,5 +26,18 @@ public class HelloControllerTest {
         mvc.perform(get("/hello")) // MockMvc를 통해 /hello 주소로 HTTP GET 요청
                 .andExpect(status().isOk()) // mvc.perform 결과 검증, HTTP Header 의 Status를 검증(200인지 아닌지)
                 .andExpect(content().string(hello)); //리턴 값이 헬로인지 검증
+    }
+    @Test
+    public void helloDTO_리턴() throws Exception {
+        String name = "hello";
+        int amount = 1000;
+
+        mvc.perform(
+                get("/hello/dto")
+                        .param("name",name) // API테스트 시 사용될 요청 파라미터를 설정, String 만 허용이므로 다른 타입의 데이터는 변환해야함
+                        .param("amount", String.valueOf(amount)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name",is(name))) //jsonPath : JSON 응답 값을 필드별로 검증할수 있는 메소드, $를 기준으로 필드명을 명시
+                .andExpect(jsonPath("$.amount", is(amount)));
     }
 }
