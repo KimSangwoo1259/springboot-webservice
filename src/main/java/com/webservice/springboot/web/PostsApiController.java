@@ -21,8 +21,10 @@ public class PostsApiController {
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto){
         return postsService.update(id, requestDto);
     }
+    // PUT과 POST의 차이점 : 멱등성(동일한 요청을 한 번 보내는 것과 여러번 연속으로 보내는 것이 같은 효과를 지님)
+    // 여러번 호출할 경우, 클라이언트가 받는 응답은 동일하다
 
-    @GetMapping("/api/v1/posts/{id]")
+    @GetMapping("/api/v1/posts/{id}")
     public PostsResponseDto findById(@PathVariable Long id){
         return postsService.findById(id);
     }

@@ -1,5 +1,6 @@
 package com.webservice.springboot.domain.posts;
 
+import com.webservice.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,9 +9,9 @@ import javax.persistence.*;
 
 
 @Getter
-@NoArgsConstructor // 기본 생성사 자동 추가
+@NoArgsConstructor // 기본 생성자 자동 추가
 @Entity // 테이블과 링크될 클래스 임을 의미 / 카멜 케이스의 이름을 언더 스코어(_)의 네이밍으로 매칭
-public class Posts {
+public class Posts extends BaseTimeEntity {
     @Id // PK
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment 가능
     private Long id;
